@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Ollama + Flask Demo</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <h1>Ollama + Flask (mistral)</h1>
+  <textarea id="prompt" rows="4" cols="60">Dime 3 consejos para aprender inglés rápido</textarea><br>
+  <button id="send">Enviar</button>
+  <pre id="out"></pre>
+
+  <script>
+    document.getElementById('send').onclick = async () => {
+      const prompt = document.getElementById('prompt').value;
+      const res = await fetch('/ask', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({prompt})
+      });
+      const j = await res.json();
+      document.getElementById('out').innerText = JSON.stringify(j, null, 2);
+    }
+  </script>
+</body>
+</html>
+
