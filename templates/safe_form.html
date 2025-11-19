@@ -36,7 +36,11 @@ async function sendMessage() {
   // Mensaje del usuario
   const userMsg = document.createElement('div');
   userMsg.className = 'message user fade-in';
-  userMsg.innerHTML = `<div class="bubble user-bubble">${text}</div>`;
+  const bubble = document.createElement('div');
+  bubble.className = 'bubble user-bubble';
+  bubble.textContent = text;     // ⬅️ textContent → convierte todo en texto plano
+
+userMsg.appendChild(bubble);
   chat.appendChild(userMsg);
   chat.scrollTop = chat.scrollHeight;
   input.value = '';
@@ -64,12 +68,21 @@ async function sendMessage() {
       answer = rawText; // Si es HTML o texto plano
     }
 
-    // Mostrar respuesta
-    const botMsg = document.createElement('div');
-    botMsg.className = 'message bot fade-in';
-    botMsg.innerHTML = `<div class="bubble bot-bubble">${answer}</div>`;
-    chat.appendChild(botMsg);
-    chat.scrollTop = chat.scrollHeight;
+    // Mostrar respuesta (SEGURO)
+  // Mostrar respuesta (SEGURO)
+      const botMsg = document.createElement('div');
+      botMsg.className = 'message bot fade-in';
+
+      const botBubble = document.createElement('div');
+      botBubble.className = 'bubble bot-bubble';
+      botBubble.textContent = answer;  // ⬅️ Esto convierte cualquier etiqueta en texto plano
+
+      botMsg.appendChild(botBubble);
+      chat.appendChild(botMsg);
+      chat.scrollTop = chat.scrollHeight;
+
+
+
 
   } catch (err) {
     const errMsg = document.createElement('div');
