@@ -22,11 +22,6 @@ def home():
 def vuln_form():
     return render_template("vuln_form.html")
 
-# --- endpoint seguro (de prueba) ---
-@app.route("/safe_form")
-def safe_form():
-    return render_template("safe_form.html")
-
 # --- endpoint "seguro" (limpio) ---
 @app.route("/ask", methods=["POST"])
 def ask():
@@ -45,6 +40,11 @@ def ask_vuln():
     user_input = body.get("prompt", "")
     full_prompt = SYSTEM_PROMPT + user_input  # <-- vulnerable
     return fn.PostRequestVuln(OLLAMA_API, MODEL, full_prompt)
+
+# --- endpoint seguro (de prueba) ---
+@app.route("/safe_form")
+def safe_form():
+    return render_template("safe_form.html")
 
 import re
 import logging
@@ -139,11 +139,11 @@ def ask_safe():
 
     # 2) Construimos prompt seguro (no concatenamos secretos)
     payload_prompt = safe_payload_prompt(user_prompt)
-    payload = {"model": "mistral", "prompt": payload_prompt, "stream": False}
+    payload = {"model": MODEL, "prompt": payload_prompt, "stream": False}
 
     # 3) Llamada a Ollama (igual que antes), con timeout prudente
     try:
-        r = requests.post(OLLAMA_URL, json=payload, headers={"Content-Type":"application/json"}, timeout=120)
+        r = requests.post(OLLAMA_API, json=payload, headers={"Content-Type":"application/json"}, timeout=120)
     except Exception as e:
         logging.error("Error contactando Ollama (safe): %s", e)
         return jsonify({"error":"No se pudo conectar con Ollama","detail": str(e)}), 500
