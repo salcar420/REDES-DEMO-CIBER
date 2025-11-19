@@ -8,7 +8,9 @@ load_dotenv()
 app = Flask(__name__, template_folder="templates", static_folder="static")
 OLLAMA_URL = os.getenv("OLLAMA_URL", "http://127.0.0.1:11434/api/generate")
 
+# --- endpoint de home ---
 @app.route("/")
+@app.route("/home")
 def home():
     return render_template("index.html")
 
@@ -200,16 +202,16 @@ def ask_safe():
     # 5) POST-PROCESS: redacción / sanitización (por si el modelo intentó filtrar)
     respuesta_saneada = redact_sensitive_from_response(respuesta)
 
-# 🛡 Sanitización adicional contra HTML / XSS
+    # 🛡 Sanitización adicional contra HTML / XSS
     from bleach import clean
     respuesta_saneada = clean(
         respuesta_saneada,
         tags=[],          # No permitimos ninguna etiqueta HTML
         attributes={},     # Ningún atributo permitido
         strip=True         # Elimina las etiquetas peligrosas
-)
+    )
     
-        # 6) Registrar logs (opcional, pero útil)
+    # 6) Registrar logs (opcional, pero útil)
     logging.info("ask_safe user_prompt=%s", user_prompt[:200])
     logging.debug("ask_safe respuesta_saneada=%s", respuesta_saneada[:500])
 
@@ -218,8 +220,6 @@ def ask_safe():
         "respuesta": respuesta_saneada,
         "note": "Parche activo: input validado y sanitizado con bleach."
     }), r.status_code
-
-
 
 
 if __name__ == "__main__":
