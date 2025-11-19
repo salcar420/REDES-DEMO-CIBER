@@ -146,3 +146,24 @@ html, body {
 .chat-container::-webkit-scrollbar-thumb:hover {
   background: #64748b;
 }
+
+/* home style */
+button {
+    background-color: #1e90ff;
+    color: white;
+    padding: 20px 24px;
+    border: none;
+    border-radius: 6px;
+    font-size: 20px;
+    cursor: pointer;
+    margin: 8px;
+}
+button:hover {
+    background-color: #0d6ed4;
+}
+
+.home-flex {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

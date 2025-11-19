@@ -6,23 +6,14 @@
   <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-  <h1>Ollama + Flask (mistral)</h1>
-  <textarea id="prompt" rows="4" cols="60">Dime 3 consejos para aprender inglés rápido</textarea><br>
-  <button id="send">Enviar</button>
-  <pre id="out"></pre>
-
-  <script>
-    document.getElementById('send').onclick = async () => {
-      const prompt = document.getElementById('prompt').value;
-      const res = await fetch('/ask', {
-        method: 'POST',
-        headers: {'Content-Type':'application/json'},
-        body: JSON.stringify({prompt})
-      });
-      const j = await res.json();
-      document.getElementById('out').innerText = JSON.stringify(j, null, 2);
-    }
-  </script>
+  <div class="home-flex">
+    <h1>Ollama + Flask</h1>
+    <h2>Escoge cual chatbot quieres usar</h2>
+    <div class="chat-header">
+      <button onclick="location.href='/safe_form'">Chatbot con medidas de seguridad</button>
+      <button onclick="location.href='/vuln_form'">Chatbot sin medidas de seguridad</button>
+    </div>
+  </div>
 </body>
 </html>
 
