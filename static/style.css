@@ -148,22 +148,47 @@ html, body {
 }
 
 /* home style */
-button {
-    background-color: #1e90ff;
-    color: white;
-    padding: 20px 24px;
-    border: none;
-    border-radius: 6px;
-    font-size: 20px;
-    cursor: pointer;
-    margin: 8px;
-}
-button:hover {
-    background-color: #0d6ed4;
-}
-
 .home-flex {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.chat-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+
+  padding: 20px;
+  margin: 0;
+}
+
+.chat-header button {
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    background-color: #1e90ff;
+    color: white;
+    font-size: 20px;
+
+    padding: 20px 24px;
+    transition: background-color 0.3s ease;
+}
+
+.chat-header button:hover {
+    background-color: #0d6ed4;
+}
+
+.-chat-header div {
+  align-self: flex-start;
+  justify-self: flex-start;
+}
+
+h4 {
+  margin: 10px;
+}
+
+.chat-header ul{
+  padding: 0 30px;
+  margin: 0;
 }

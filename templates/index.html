@@ -10,8 +10,25 @@
     <h1>Ollama + Flask</h1>
     <h2>Escoge cual chatbot quieres usar</h2>
     <div class="chat-header">
-      <button onclick="location.href='/safe_form'">Chatbot con medidas de seguridad</button>
-      <button onclick="location.href='/vuln_form'">Chatbot sin medidas de seguridad</button>
+      <div>
+        <button onclick="location.href='/safe_form'">Chatbot con medidas de seguridad</button>
+        <h4>Tiene bloqueo contra</h4>
+        <ul>
+          <li>Prompt injection</li>
+          <li>Indirect promp injection</li>
+          <li>HTML injection</li>
+          <li>Ataques por formato o tokens maliciosos</li>
+          <li>Ataques por prompt con json o xml</li>
+      </div>
+      <div>
+        <button onclick="location.href='/vuln_form'">Chatbot sin medidas de seguridad</button>
+        <h4>No tiene seguridad</h4>
+        <ul>
+          <li>Vulnerable</li>
+          <li>"Funciona"</li>
+          <li>Hecho con vibe coding</li>
+        </ul>
+      </div>
     </div>
   </div>
 </body>
